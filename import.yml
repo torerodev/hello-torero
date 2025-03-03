@@ -3,7 +3,7 @@ repositories:
     - name: hello-torero
       description: Get started with torero
       url: https://github.com/torerodev/hello-torero.git
-      reference: main
+      reference: develop
 
 services:
     - name: hello-ansible
