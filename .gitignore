@@ -1,0 +1,43 @@
+# OpenTofu specific files
+.tofu/
+*.tfstate
+*.tfstate.backup
+
+# Ignore sensitive files
+*.tfvars
+*.tfvars.json
+*.tfplan
+
+# Ignore logs and crash reports
+crash.log
+*.log
+*.out
+*.err
+
+# Ignore editor and OS-specific files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*.bak
+*.tmp
+~$*
+
+# Ignore Terraform provider plugins
+.terraform/
+.terraform.lock.hcl
+
+# Ignore generated and compiled files
+*.tf.json
+*.zip
+*.tar.gz
+
+# Ignore test and debug artifacts
+debug/
+test-results/
+output/
+
+# Ignore OpenTofu CLI cache
+.tofu.lock
