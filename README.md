@@ -32,8 +32,12 @@ torero get repositories \
 > To view all details about these resources, use [describe repository](https://docs.torero.dev/en/latest/cli/torero_describe_repository/) and [describe service](https://docs.torero.dev/en/latest/cli/torero_describe_service/)
 > ```bash
 > torero describe repository hello-torero \
->   && torero describe service hello-ansible
+>   && torero describe service hello-ansible \
+>   && torero describe service hello-python \
+>   && torero describe service hello-opentofu
 > ```
+
+![describe services](./.img/describe-services.gif)
 
 ## Running Services
 Let's run the services we imported using [run service](https://docs.torero.dev/en/latest/cli/torero_run_service/) along with the _service-type_ and _service-name_.
