@@ -1,11 +1,20 @@
 ---
 - name: Hello World
-  hosts: 127.0.0.1
+  hosts: "{{ target_host | default('127.0.0.1') }}"
+  vars:
+    greeting_message: "{{ message | default('Hello world!') }}"
+    user_name: "{{ username | default('World') }}"
+    environment_type: "{{ env_type | default('development') }}"
   tasks:
    - name: Ping my hosts
      ansible.builtin.ping:
 
-   - name: Print message
+   - name: Print personalized greeting
      ansible.builtin.debug:
-      msg: Hello world!
+      msg: "{{ greeting_message }} {{ user_name }}! Running in {{ environment_type }} environment."
+   
+   - name: Display system info (optional)
+     ansible.builtin.debug:
+      msg: "System: {{ ansible_facts['system'] | default('Unknown') }}, Architecture: {{ ansible_facts['architecture'] | default('Unknown') }}"
+     when: show_system_info | default(false) | bool
 ...

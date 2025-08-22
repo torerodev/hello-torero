@@ -11,7 +11,7 @@ repositories:
 services:
     - name: hello-ansible
       type: ansible-playbook
-      description: Ansible hello world
+      description: Ansible hello world with optional input variables
       working-directory: hello-ansible
       playbooks:
         - hello-ansible.yml
@@ -19,23 +19,42 @@ services:
       tags:
         - demo
         - ansible
+      # Optional extra-vars for testing:
+      # message: Custom greeting message (default: "Hello world!")
+      # username: Target username (default: "World")
+      # env_type: Environment type (default: "development")
+      # target_host: Target host (default: "127.0.0.1")
+      # show_system_info: Show system information (default: false)
 
     - name: hello-python
       type: python-script
-      description: Python hello world
+      description: Python hello world with optional environment variables
       filename: hello-python.py
       working-directory: hello-python
       repository: hello-torero
       tags:
         - demo
         - python
+      # Optional environment variables for testing:
+      # MESSAGE: Custom message (default: "Hello World!")
+      # USER_NAME: Target username (default: "World")
+      # ENVIRONMENT: Environment name (default: "development")
+      # REPEAT_COUNT: Number of repetitions (default: "1")
+      # ENABLE_TIMESTAMP: Include timestamp (default: "false")
+      # OUTPUT_FORMAT: Output format - text or json (default: "text")
 
     - name: hello-opentofu
       type: opentofu-plan
-      description: OpenTOFU hello world
+      description: OpenTOFU hello world with optional variables
       working-directory: hello-opentofu
       repository: hello-torero
       tags:
         - demo
         - opentofu
+      # Optional variables for testing:
+      # message: Custom message to display (default: "Hello World")
+      # environment: Environment name (default: "dev")
+      # user_name: Name of the user (default: "User")
+      # repeat_count: Number of repetitions (default: 1)
+      # enable_timestamp: Include timestamp (default: false)
 ...
