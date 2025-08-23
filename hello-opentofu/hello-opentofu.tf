@@ -1,57 +1,33 @@
-variable "message" {
-  description = "Custom message to display"
+variable "first_string" {
+  description = "The first string to display"
   type        = string
-  default     = "Hello World"
+  default     = "Hello"
 }
 
-variable "environment" {
-  description = "Environment name (dev, staging, prod)"
+variable "second_string" {
+  description = "The second string to display"
   type        = string
-  default     = "dev"
+  default     = "World"
 }
 
-variable "user_name" {
-  description = "Name of the user running the plan"
-  type        = string
-  default     = "User"
-}
-
-variable "repeat_count" {
-  description = "Number of times to repeat the message"
-  type        = number
-  default     = 1
-}
-
-variable "enable_timestamp" {
-  description = "Whether to include timestamp in output"
-  type        = bool
-  default     = false
-}
-
-locals {
-  timestamp = var.enable_timestamp ? timestamp() : ""
-  final_message = var.enable_timestamp ? "${var.message} from ${var.user_name} in ${var.environment} at ${local.timestamp}" : "${var.message} from ${var.user_name} in ${var.environment}"
-}
-
-resource "null_resource" "this" {
-  count = var.repeat_count
-  
+resource "null_resource" "hello" {
   provisioner "local-exec" {
-    command = "echo '${local.final_message} (iteration ${count.index + 1})'"
+    command = "echo '${var.first_string}'"
   }
 }
 
-output "message" {
-  description = "The message that was displayed"
-  value       = local.final_message
+resource "null_resource" "world" {
+  provisioner "local-exec" {
+    command = "echo '${var.second_string}'"
+  }
 }
 
-output "environment" {
-  description = "The environment this was run in"
-  value       = var.environment
+output "first_output" {
+  description = "The first string that was displayed"
+  value       = var.first_string
 }
 
-output "repeat_count" {
-  description = "Number of times the message was repeated"
-  value       = var.repeat_count
+output "second_output" {
+  description = "The second string that was displayed"
+  value       = var.second_string
 }
