@@ -11,7 +11,7 @@ repositories:
 services:
     - name: hello-ansible
       type: ansible-playbook
-      description: Ansible hello world with optional input variables
+      description: Ansible hello world with two string variables
       decorator: hello-ansible-decorator
       working-directory: hello-ansible
       playbooks:
@@ -21,15 +21,13 @@ services:
         - demo
         - ansible
       # Optional extra-vars for testing:
-      # message: Custom greeting message (default: "Hello world!")
-      # username: Target username (default: "World")
-      # env_type: Environment type (default: "development")
+      # first_string: First string to print (default: "Hello")
+      # second_string: Second string to print (default: "World")
       # target_host: Target host (default: "127.0.0.1")
-      # show_system_info: Show system information (default: false)
 
     - name: hello-python
       type: python-script
-      description: Python hello world with optional environment variables
+      description: Python hello world with two string variables
       decorator: hello-python-decorator
       filename: hello-python.py
       working-directory: hello-python
@@ -38,16 +36,12 @@ services:
         - demo
         - python
       # Optional environment variables for testing:
-      # MESSAGE: Custom message (default: "Hello World!")
-      # USER_NAME: Target username (default: "World")
-      # ENVIRONMENT: Environment name (default: "development")
-      # REPEAT_COUNT: Number of repetitions (default: "1")
-      # ENABLE_TIMESTAMP: Include timestamp (default: "false")
-      # OUTPUT_FORMAT: Output format - text or json (default: "text")
+      # first_string: First string to print (default: "Hello")
+      # second_string: Second string to print (default: "World")
 
     - name: hello-opentofu
       type: opentofu-plan
-      description: OpenTOFU hello world with optional variables
+      description: OpenTOFU hello world with two string variables
       decorator: hello-opentofu-decorator
       working-directory: hello-opentofu
       repository: hello-torero
@@ -55,15 +49,12 @@ services:
         - demo
         - opentofu
       # Optional variables for testing:
-      # message: Custom message to display (default: "Hello World")
-      # environment: Environment name (default: "dev")
-      # user_name: Name of the user (default: "User")
-      # repeat_count: Number of repetitions (default: 1)
-      # enable_timestamp: Include timestamp (default: false)
+      # first_string: First string to print (default: "Hello")
+      # second_string: Second string to print (default: "World")
 
 decorators:
     - name: hello-ansible-decorator
-      description: "Decorator for hello-ansible playbook input validation"
+      description: "Decorator for hello-ansible playbook with two string variables"
       schema:
         $id: "hello-ansible"
         $schema: "https://json-schema.org/draft/2020-12/schema"
@@ -73,94 +64,50 @@ decorators:
             type: string
             description: "Target host for Ansible to connect to"
             default: "127.0.0.1"
-          message:
+          first_string:
             type: string
-            description: "Greeting message to display"
-            default: "Hello world!"
-          username:
+            description: "First string to print"
+            default: "Hello"
+          second_string:
             type: string
-            description: "User name for personalized greeting"
+            description: "Second string to print"
             default: "World"
-          env_type:
-            type: string
-            description: "Environment type"
-            enum: ["development", "staging", "production"]
-            default: "development"
-          show_system_info:
-            type: boolean
-            description: "Whether to display system information"
-            default: false
         required: []
         additionalProperties: false
 
     - name: hello-opentofu-decorator
-      description: "Decorator for hello-opentofu infrastructure variables"
+      description: "Decorator for hello-opentofu with two string variables"
       schema:
         $id: "hello-opentofu"
         $schema: "https://json-schema.org/draft/2020-12/schema"
         type: object
         properties:
-          message:
+          first_string:
             type: string
-            description: "Custom message to display"
-            default: "Hello World"
-          environment:
+            description: "First string to print"
+            default: "Hello"
+          second_string:
             type: string
-            description: "Environment name"
-            enum: ["dev", "staging", "prod"]
-            default: "dev"
-          user_name:
-            type: string
-            description: "Name of the user running the plan"
-            default: "User"
-          repeat_count:
-            type: number
-            description: "Number of times to repeat the message"
-            minimum: 1
-            maximum: 10
-            default: 1
-          enable_timestamp:
-            type: boolean
-            description: "Whether to include timestamp in output"
-            default: false
+            description: "Second string to print"
+            default: "World"
         required: []
         additionalProperties: false
 
     - name: hello-python-decorator
-      description: "Decorator for hello-python script input variables"
+      description: "Decorator for hello-python script with two string variables"
       schema:
         $id: "hello-python"
         $schema: "https://json-schema.org/draft/2020-12/schema"
         type: object
         properties:
-          MESSAGE:
+          first_string:
             type: string
-            description: "Main greeting message"
-            default: "Hello World!"
-          USER_NAME:
+            description: "First string to print"
+            default: "Hello"
+          second_string:
             type: string
-            description: "User name for personalized greeting"
+            description: "Second string to print"
             default: "World"
-          ENVIRONMENT:
-            type: string
-            description: "Environment where the script is running"
-            enum: ["development", "staging", "production"]
-            default: "development"
-          REPEAT_COUNT:
-            type: string
-            description: "Number of times to repeat the message"
-            pattern: "^[1-9][0-9]?$"
-            default: "1"
-          ENABLE_TIMESTAMP:
-            type: string
-            description: "Whether to include timestamp (true/false)"
-            enum: ["true", "false", "1", "0", "yes", "no"]
-            default: "false"
-          OUTPUT_FORMAT:
-            type: string
-            description: "Output format for the script"
-            enum: ["text", "json"]
-            default: "text"
         required: []
         additionalProperties: false
 ...
