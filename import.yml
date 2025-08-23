@@ -12,6 +12,7 @@ services:
     - name: hello-ansible
       type: ansible-playbook
       description: Ansible hello world with optional input variables
+      decorator: hello-ansible-decorator
       working-directory: hello-ansible
       playbooks:
         - hello-ansible.yml
@@ -29,6 +30,7 @@ services:
     - name: hello-python
       type: python-script
       description: Python hello world with optional environment variables
+      decorator: hello-python-decorator
       filename: hello-python.py
       working-directory: hello-python
       repository: hello-torero
@@ -46,6 +48,7 @@ services:
     - name: hello-opentofu
       type: opentofu-plan
       description: OpenTOFU hello world with optional variables
+      decorator: hello-opentofu-decorator
       working-directory: hello-opentofu
       repository: hello-torero
       tags:
@@ -57,4 +60,107 @@ services:
       # user_name: Name of the user (default: "User")
       # repeat_count: Number of repetitions (default: 1)
       # enable_timestamp: Include timestamp (default: false)
+
+decorators:
+    - name: hello-ansible-decorator
+      description: "Decorator for hello-ansible playbook input validation"
+      schema:
+        $id: "hello-ansible"
+        $schema: "https://json-schema.org/draft/2020-12/schema"
+        type: object
+        properties:
+          target_host:
+            type: string
+            description: "Target host for Ansible to connect to"
+            default: "127.0.0.1"
+          message:
+            type: string
+            description: "Greeting message to display"
+            default: "Hello world!"
+          username:
+            type: string
+            description: "User name for personalized greeting"
+            default: "World"
+          env_type:
+            type: string
+            description: "Environment type"
+            enum: ["development", "staging", "production"]
+            default: "development"
+          show_system_info:
+            type: boolean
+            description: "Whether to display system information"
+            default: false
+        required: []
+        additionalProperties: false
+
+    - name: hello-opentofu-decorator
+      description: "Decorator for hello-opentofu infrastructure variables"
+      schema:
+        $id: "hello-opentofu"
+        $schema: "https://json-schema.org/draft/2020-12/schema"
+        type: object
+        properties:
+          message:
+            type: string
+            description: "Custom message to display"
+            default: "Hello World"
+          environment:
+            type: string
+            description: "Environment name"
+            enum: ["dev", "staging", "prod"]
+            default: "dev"
+          user_name:
+            type: string
+            description: "Name of the user running the plan"
+            default: "User"
+          repeat_count:
+            type: number
+            description: "Number of times to repeat the message"
+            minimum: 1
+            maximum: 10
+            default: 1
+          enable_timestamp:
+            type: boolean
+            description: "Whether to include timestamp in output"
+            default: false
+        required: []
+        additionalProperties: false
+
+    - name: hello-python-decorator
+      description: "Decorator for hello-python script input variables"
+      schema:
+        $id: "hello-python"
+        $schema: "https://json-schema.org/draft/2020-12/schema"
+        type: object
+        properties:
+          MESSAGE:
+            type: string
+            description: "Main greeting message"
+            default: "Hello World!"
+          USER_NAME:
+            type: string
+            description: "User name for personalized greeting"
+            default: "World"
+          ENVIRONMENT:
+            type: string
+            description: "Environment where the script is running"
+            enum: ["development", "staging", "production"]
+            default: "development"
+          REPEAT_COUNT:
+            type: string
+            description: "Number of times to repeat the message"
+            pattern: "^[1-9][0-9]?$"
+            default: "1"
+          ENABLE_TIMESTAMP:
+            type: string
+            description: "Whether to include timestamp (true/false)"
+            enum: ["true", "false", "1", "0", "yes", "no"]
+            default: "false"
+          OUTPUT_FORMAT:
+            type: string
+            description: "Output format for the script"
+            enum: ["text", "json"]
+            default: "text"
+        required: []
+        additionalProperties: false
 ...
