@@ -52,62 +52,62 @@ services:
       # first_string: First string to print (default: "Hello")
       # second_string: Second string to print (default: "World")
 
-decorators:
-    - name: hello-ansible-decorator
-      description: "Decorator for hello-ansible playbook with two string variables"
-      schema:
-        $id: "hello-ansible"
-        $schema: "https://json-schema.org/draft/2020-12/schema"
-        type: object
-        properties:
-          target_host:
-            type: string
-            description: "Target host for Ansible to connect to"
-            default: "127.0.0.1"
-          first_string:
-            type: string
-            description: "First string to print"
-            default: "Hello"
-          second_string:
-            type: string
-            description: "Second string to print"
-            default: "World"
-        required: []
-        additionalProperties: false
+# decorators:
+#     - name: hello-ansible-decorator
+#       description: "Decorator for hello-ansible playbook with two string variables"
+#       schema:
+#         $id: "hello-ansible"
+#         $schema: "https://json-schema.org/draft/2020-12/schema"
+#         type: object
+#         properties:
+#           target_host:
+#             type: string
+#             description: "Target host for Ansible to connect to"
+#             default: "127.0.0.1"
+#           first_string:
+#             type: string
+#             description: "First string to print"
+#             default: "Hello"
+#           second_string:
+#             type: string
+#             description: "Second string to print"
+#             default: "World"
+#         required: []
+#         additionalProperties: false
 
-    - name: hello-opentofu-decorator
-      description: "Decorator for hello-opentofu with two string variables"
-      schema:
-        $id: "hello-opentofu"
-        $schema: "https://json-schema.org/draft/2020-12/schema"
-        type: object
-        properties:
-          first_string:
-            type: string
-            description: "First string to print"
-            default: "Hello"
-          second_string:
-            type: string
-            description: "Second string to print"
-            default: "World"
-        required: []
-        additionalProperties: false
+#     - name: hello-opentofu-decorator
+#       description: "Decorator for hello-opentofu with two string variables"
+#       schema:
+#         $id: "hello-opentofu"
+#         $schema: "https://json-schema.org/draft/2020-12/schema"
+#         type: object
+#         properties:
+#           first_string:
+#             type: string
+#             description: "First string to print"
+#             default: "Hello"
+#           second_string:
+#             type: string
+#             description: "Second string to print"
+#             default: "World"
+#         required: []
+#         additionalProperties: false
 
-    - name: hello-python-decorator
-      description: "Decorator for hello-python script with two string variables"
-      schema:
-        $id: "hello-python"
-        $schema: "https://json-schema.org/draft/2020-12/schema"
-        type: object
-        properties:
-          first_string:
-            type: string
-            description: "First string to print"
-            default: "Hello"
-          second_string:
-            type: string
-            description: "Second string to print"
-            default: "World"
-        required: []
-        additionalProperties: false
+#     - name: hello-python-decorator
+#       description: "Decorator for hello-python script with two string variables"
+#       schema:
+#         $id: "hello-python"
+#         $schema: "https://json-schema.org/draft/2020-12/schema"
+#         type: object
+#         properties:
+#           first_string:
+#             type: string
+#             description: "First string to print"
+#             default: "Hello"
+#           second_string:
+#             type: string
+#             description: "Second string to print"
+#             default: "World"
+#         required: []
+#         additionalProperties: false
 ...
