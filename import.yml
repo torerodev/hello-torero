@@ -12,7 +12,7 @@ services:
     - name: hello-ansible
       type: ansible-playbook
       description: Ansible hello world with two string variables
-      decorator: hello-ansible-decorator
+      # decorator: hello-ansible-decorator
       working-directory: hello-ansible
       playbooks:
         - hello-ansible.yml
@@ -28,7 +28,7 @@ services:
     - name: hello-python
       type: python-script
       description: Python hello world with two string variables
-      decorator: hello-python-decorator
+      # decorator: hello-python-decorator
       filename: hello-python.py
       working-directory: hello-python
       repository: hello-torero
@@ -42,7 +42,7 @@ services:
     - name: hello-opentofu
       type: opentofu-plan
       description: OpenTOFU hello world with two string variables
-      decorator: hello-opentofu-decorator
+      # decorator: hello-opentofu-decorator
       working-directory: hello-opentofu
       repository: hello-torero
       tags:
