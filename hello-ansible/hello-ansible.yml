@@ -4,8 +4,8 @@
   connection: local
   gather_facts: no
   vars:
-    first_string: "{{ first_string | default('Hello') }}"
-    second_string: "{{ second_string | default('World') }}"
+    first_string: "Hello"
+    second_string: "World"
   tasks:
    - name: Print first string
      ansible.builtin.debug:
